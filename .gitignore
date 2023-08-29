@@ -1,0 +1,9 @@
+/venv
+celerybeat-schedule
+.env
+/media
+safcam.session.sql
+/.vscode
+/__pycache__
+*/__pycache__
+.env-non-dev

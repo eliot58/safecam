@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:14.7-alpine
+    ports:
+      - 5431:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=OvnhiLXsSEJPg
+      - POSTGRES_DB=safecam
+  api:
+    build: ./
+    command: bash -c "aerich upgrade && uvicorn main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env-non-dev
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
